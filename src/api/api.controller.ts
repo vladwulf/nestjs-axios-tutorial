@@ -14,4 +14,9 @@ export class ApiController {
   getCatFacts() {
     return this.apiService.getCatFacts();
   }
+
+  @Get('facts/cats/deprecated')
+  getCatFactsWithAxiosLib() {
+    return this.apiService.getCatFactsWithAxiosLib();
+  }
 }

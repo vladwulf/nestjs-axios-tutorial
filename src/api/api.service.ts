@@ -1,5 +1,6 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
+import axios from 'axios';
 import { catchError, map, lastValueFrom } from 'rxjs';
 
 @Injectable()
@@ -41,6 +42,21 @@ export class ApiService {
     return {
       data: {
         fact,
+      },
+    };
+  }
+
+  async getCatFactsWithAxiosLib() {
+    const response = await axios({
+      method: 'GET',
+      url: 'https://catfact.ninja/fact',
+    }).catch(() => {
+      throw new ForbiddenException('API not available');
+    });
+
+    return {
+      data: {
+        fact: response.data?.fact,
       },
     };
   }
